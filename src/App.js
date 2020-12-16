@@ -26,13 +26,22 @@ class App extends Component {
     this.setState({ contacts: [ newContact, ...contacts ] })
   }
 
+  removeContact = (id) => {
+    const contacts = this.state.contacts.filter( contact => {
+      if (contact.id !== id) {
+        return contact
+      }
+    })
+    this.setState({ contacts: [...contacts]})
+  }
+
   render() {
     const { contacts } = this.state
     return (
       <>
         <h1>React Contact List</h1>
         <ContactForm addContact={this.addContact} />
-        <ContactList contacts={contacts} />
+        <ContactList contacts={contacts} removeContact={this.removeContact} />
       </>
     )
   }
